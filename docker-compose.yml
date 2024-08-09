@@ -1,0 +1,11 @@
+version: '3.8'
+
+
+services:
+  pytorch-container: # @容器名
+    build: .
+    ports:
+      - "${CONTAINER_PORT}:22"  # 将主机的PORT端口映射到容器的22端口
+    volumes:
+      # - @服务器想要挂载的文件夹:@挂载到容器里的路径  # 替换容器内的挂载路径
+      - /test:/share  # 替换容器内的挂载路径
