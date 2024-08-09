@@ -14,9 +14,18 @@ sudo docker pull pytorch/pytorch
 
 - 在docker-compose.yml里，services里设置容器名
 - 设置对外的端口号，这里是从.env中读取的，也可以直接设置
+- 在volunms设置挂载的文件夹
+
+> 可以设置多个不同的容器
 
 # 3、启动容器
 
 ```bash
 docker-compose up -d
+```
+
+# 4、ssh连接容器
+
+```bash
+ssh@root//@服务器ip:@步骤2里设置的端口号
 ```
