@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  cuda124:
+    image: conda-with-cuda124:v2024.10.15  # 替换为实际的镜像名称，这里使用的是上一步中构建的镜像
+    container_name: py310.2024.10.15 # 容器名字
+    restart: always # 自动重启
+    shm_size: '48G' # 共享内存大小，如果设置太小，显卡之间将无法通信
+    # network_mode: none # 网络模式，设置为none，则容器内的网络不受外部影响
+    volumes: # 设置挂载目录，格式为：- 宿主机目录src:容器目录dst
+      - $src:$dst
+    ports: # 端口映射，格式为：- 宿主机端口:容器端口
+      - 12126:22 # ssh 端口映射，这里的12126可以自己定义，后面根据这个端口连接容器
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+              driver: nvidia
+              count: 10  # 使用的 GPU 数量，根据实际情况调整
